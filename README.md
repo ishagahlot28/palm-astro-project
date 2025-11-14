@@ -1,107 +1,158 @@
-<img width="1920" height="1080" alt="Screenshot (68)" src="https://github.com/user-attachments/assets/902f9f8e-d24e-46c4-9756-95114dcd6888" /># 🖐️ Palm Segmentation using Deep Learning
+
+# 🖐️ Palm Astro Project — Palm Image Segmentation using U-Net  
+
+![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)
+![PyTorch](https://img.shields.io/badge/Framework-PyTorch-red.svg)
+![License](https://img.shields.io/badge/License-MIT-green.svg)
+![Status](https://img.shields.io/badge/Status-Completed-success.svg)
+
+---
 
 ## 📘 Overview
-This project is based on palm image segmentation using Python and deep learning.
-It trains a U-Net model (with EfficientNet encoder) to detect and highlight the palm region from input images.
+This project performs **palm image segmentation** using a **U-Net deep learning model** built in **PyTorch**.  
+The model takes a hand image and predicts the palm region mask — useful for:
 
-The project fulfills all assignment requirements for **Python Test 1 — Palm History Project**.
-
----
-
-## 🚀 Features
-- Organizes data (images and masks)
-- Automatically generates dummy masks if missing
-- Trains a segmentation model using PyTorch
-- Saves checkpoints and best model
-- Performs inference on palm images
-- Displays and saves visual predictions
+- Palmistry analysis  
+- Biometrics  
+- Gesture recognition  
+- Hand shape detection  
 
 ---
 
-## 🧩 Folder Structure
+## 📂 Project Structure
+
+
 palm-astro-project/
-┣ 📂 data/
-│ ┣ 📂 images/train/
-│ ┗ 📂 masks/train/
-┣ 📂 models/
-│ ┗ 📜 best_model.pth
-┣ 📂 output/
-│ ┗ 📜 predicted_palm.png
-┣ 📜 train.py
-┣ 📜 inference.py
-┣ 📜 make_masks.py
-┣ 📜 check_data.py
-┣ 📜 requirements.txt
-┗ 📜 README.md
+├── data/
+│ ├── images/ # input palm images (train/val)
+│ ├── masks/ # segmentation masks
+├── models/ # trained model weights (.pth)
+├── output/ # prediction outputs
+├── utils/ # helper scripts
+├── train.py # training script
+├── inference.py # inference and visualization
+├── make_masks.py # generate masks if missing
+├── make_small_dataset.py # create 200-image dataset
+├── requirements.txt # python dependencies
+└── README.md
+
+## 🧠 Model Details
+- **Architecture:** U-Net  
+- **Encoder:** EfficientNet-B0 (ImageNet pretrained)  
+- **Loss Function:** Binary Cross Entropy  
+- **Optimizer:** Adam  
+- **Epochs Trained:** 10  
+- **Batch Size:** 2  
+- **Framework:** PyTorch + segmentation-models-pytorch  
+
+---
+
+## 📦 Dataset
+Dataset used: **Human Palm Images** (from Kaggle)  
+Download manually OR via CLI:
+
+
+
+kaggle datasets download -d feyiamujo/human-palm-images
+
+
+Unzip:
+
+
+
+unzip human-palm-images.zip -d data/images
+
+
+To create a smaller 200-image dataset:
+
+
+
+python make_small_dataset.py
 
 
 ---
 
-## ⚙️ Setup Instructions
+## ⚙️ Installation
 
-### 1️⃣ Create virtual environment
-```bash
+
+
+git clone https://github.com/ishagahlot28/palm-astro-project.git
+
+cd palm-astro-project
 python -m venv venv
 venv\Scripts\activate
-2️⃣ Install Dependencies
 pip install -r requirements.txt
 
-3️⃣ Prepare Dataset
 
-Add your palm images to:
+---
 
-data/images/train/
+## 🚀 Training
 
 
-If masks are missing, run:
 
-python make_masks.py
-4️⃣ Train the Model
-python train.py --data_dir data --split train --epochs 2 --batch_size 1 --save_dir models
+python train.py --data_dir data --split small_train --epochs 10 --batch_size 2 --save_dir models
 
-5️⃣ Run Inference / Prediction
+
+Model will be saved in:
+
+
+
+models/best_model.pth
+
+
+---
+
+## 🧪 Inference
+
+
+
 python inference.py
 
 
-Libraries Used
+This will generate visualization similar to:
 
-torch
+### Input vs Predicted Output
+| Input Palm Image | Predicted Palm Region |
+|------------------|----------------------|
+| *(your input image)* | *(U-Net segmented palm mask)* |
 
-torchvision
+---
 
-torchaudio
-
-segmentation-models-pytorch
-
-pillow
-
-tqdm
-
-matplotlib
-
-numpy
-
-🏁 Results
-Input Palm Image	Predicted Palm Region
+## 📊 Sample Training Log
 
 
 
-
-✅ Successfully trained and tested the palm segmentation model.
-The project demonstrates model training, prediction, and visualization — fulfilling all assignment requirements.
-
-
-
+Epoch 1 - Avg Loss: 0.6389
+Epoch 5 - Avg Loss: 0.1296
+Epoch 10 - Avg Loss: 0.0390
+Training complete — model saved to models/
 
 
+---
+
+## 📁 Outputs
+- ✔ `best_model.pth` — final model  
+- ✔ `checkpoint_epoch_*.pth` — intermediate  
+- ✔ `output/` — visual segmentation results  
+
+---
+
+## 🧰 Tech Stack
+
+- Python 3.10+  
+- PyTorch  
+- segmentation-models-pytorch  
+- NumPy  
+- Pillow  
+- OpenCV  
+- Matplotlib  
+- TQDM  
 
 
 
+---
 
-
-
-
-
-pip install -r requirements.txt
-
-
+## ✨ Author
+**Isha Gahlot**  
+🔗 GitHub: https://github.com/ishagahlot28  
+📅 November 2025  
